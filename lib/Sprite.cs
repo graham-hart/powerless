@@ -1,0 +1,7 @@
+namespace CSLib
+{
+    class Sprite
+    {
+
+    }
+}
