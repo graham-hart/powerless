@@ -1,6 +1,8 @@
 using Raylib_cs;
 using static Raylib_cs.KeyboardKey;
 using static Raylib_cs.Raylib;
+using System;
+using System.Collections.Generic;
 namespace CSLib {
     static class Utils {
         public static bool IsLetter(char c) {

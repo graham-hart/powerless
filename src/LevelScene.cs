@@ -3,6 +3,9 @@ using static Raylib_cs.Raylib;
 using System;
 using System.Collections.Generic;
 using CSLib;
+using System.Linq;
+using static Powerless.Config;
+
 namespace Powerless
 {
     class LevelScene : Scene
@@ -11,52 +14,38 @@ namespace Powerless
         TextureAtlas tileAtlas;
         TextureAtlas spriteAtlas;
         Camera cam;
-        Entity character;
+        Player player;
+        Dictionary<int, List<Tile>> visibleTiles;
         public LevelScene(MainGame game) : base(game)
         {
-            tileAtlas = TextureAtlas.FromFile("assets/images/tiles/test.atlas");
+            tileAtlas = TextureAtlas.FromFile("assets/images/tiles/atlas/atlas.txt", "tile");
+            spriteAtlas = TextureAtlas.FromFile("./assets/images/sprites/atlas/atlas.txt", "sprite");
             tilemap = TileMap.FromFile("assets/tilemaps/test.ptm");
             Utils.SortTMLayers(tilemap);
-            cam = new Camera(game.winSize, 2, 16);
-            // character = new Entity(new Vec2(0,0), new Vec2(1,1), )
+            cam = new Camera(game.winSize, 3, 16);
+            player = new Player(new Vec2(0, -1));
         }
 
         public override void Update(float dt)
         {
-            float speed = 15f * dt;
-            Vec2 move = Vec2.Zero;
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_W))
-            {
-                move.y -= speed;
-            }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_S))
-            {
-                move.y += speed;
-            }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
-            {
-                move.x -= speed;
-            }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
-            {
-                move.x += speed;
-            }
-            cam.Move(move);
+            visibleTiles = tilemap.GetVisible(cam);
+            player.Update(dt, visibleTiles);
+            cam.SetPos(player.transform.pos); 
         }
         public override void Render()
         {
             BeginDrawing();
             ClearBackground(Color.BLACK);
             BeginMode2D(cam.camera);
-            Dictionary<int, Dictionary<Vec2, Tile>> tiles = tilemap.GetVisible(cam);
             foreach (int z in tilemap.layers)
             {
-                Dictionary<Vec2, Tile> layer = tiles[z];
-                foreach (Tile t in layer.Values)
+                List<Tile> layer = visibleTiles[z];
+                foreach (Tile t in layer)
                 {
                     tileAtlas.DrawTexture(t.type, t.pos * cam.pixelsPerUnit);
                 }
             }
+            player.Render(cam);
             EndMode2D();
             DrawFPS(0, 0);
             EndDrawing();

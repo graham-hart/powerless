@@ -10,19 +10,20 @@ namespace CSLib
 {
     class TextureAtlas
     {
+        static Dictionary<string, TextureAtlas> atlases = new Dictionary<string, TextureAtlas>();
         Texture2D text;
         Dictionary<string, Rectangle> images = new Dictionary<string, Rectangle>();
-        private TextureAtlas()
+        private TextureAtlas(string name)
         {
-
+            atlases.Add(name, this);
         }
         public string[] AllTextureNames()
         {
             return images.Keys.ToArray();
         }
-        public static TextureAtlas FromFile(string fn)
+        public static TextureAtlas FromFile(string fn, string name)
         {
-            TextureAtlas tx = new TextureAtlas();
+            TextureAtlas tx = new TextureAtlas(name);
             Dictionary<string, Rectangle> imgs = tx.images;
             string[] lines = File.ReadLines(fn).ToArray();
             string imagefn = lines[0];
@@ -59,6 +60,9 @@ namespace CSLib
         {
             DrawTextureRec(text, images[id], new System.Numerics.Vector2((float)pos.x, (float)pos.y), Color.WHITE);
             // Raylib.DrawRectangle((int)pos.x,(int)pos.y, (int)images[id].width, (int)images[id].height, Color.WHITE);
+        }
+        public static TextureAtlas GetAtlas(string name) {
+            return atlases[name];
         }
     }
 }

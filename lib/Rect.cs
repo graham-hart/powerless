@@ -1,4 +1,5 @@
 using Raylib_cs;
+using System;
 namespace CSLib
 {
     public class Rect
@@ -84,7 +85,7 @@ namespace CSLib
         {
             Vec2 br = BottomRight();
             Vec2 obr = o.BottomRight();
-            return br.x >= o.X && X <= obr.x && br.y >= o.Y && Y <= obr.y;
+            return br.x > o.X && X < obr.x && br.y > o.Y && Y < obr.y;
         }
         public bool CollidePoint(Vec2 p)
         {

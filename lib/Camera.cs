@@ -88,8 +88,12 @@ namespace CSLib
         }
         public void Move(Vec2 change)
         {
-            camera.offset.X -= (float)ProjectXDist(change.x);
-            camera.offset.Y -= (float)ProjectYDist(change.y);
+            camera.offset.X += (float)ProjectXDist(change.x);
+            camera.offset.Y += (float)ProjectYDist(change.y);
+        }
+        public void SetPos(Vec2 pos) {
+            camera.offset.X = (float)(-ProjectXDist(pos.x)+screenSize.x/2);
+            camera.offset.Y = (float)(-ProjectYDist(pos.y)+screenSize.y/2); // Really should change the target, but fuck you that didnt work bc WHY THE FUCK RAYLIB
         }
     }
 }

@@ -42,6 +42,34 @@ namespace CSLib
                 return new Vec2(1, 1);
             }
         }
+        public static Vec2 Left
+        {
+            get
+            {
+                return new Vec2(-1, 0);
+            }
+        }
+        public static Vec2 Right
+        {
+            get
+            {
+                return new Vec2(1, 0);
+            }
+        }
+        public static Vec2 Up
+        {
+            get
+            {
+                return new Vec2(0, 1);
+            }
+        }
+        public static Vec2 Down
+        {
+            get
+            {
+                return new Vec2(0, -1);
+            }
+        }
         public static Vec2 operator +(Vec2 a, Vec2 b)
         {
             return new Vec2(b.x + a.x, b.y + a.y);
@@ -124,13 +152,13 @@ namespace CSLib
         }
         public void Add(double x, double y)
         {
-            x += x;
-            y += y;
+            this.x += x;
+            this.y += y;
         }
         public void Sub(double x, double y)
         {
-            x -= x;
-            y -= y;
+            this.x -= x;
+            this.y -= y;
         }
         public Vec2 Copy()
         {
@@ -199,16 +227,20 @@ namespace CSLib
             x = v.x;
             y = v.y;
         }
-        public Vec2 Floored() {
+        public Vec2 Floored()
+        {
             return new Vec2(Math.Floor(x), Math.Floor(y));
         }
-        public Vec2 Rounded() {
+        public Vec2 Rounded()
+        {
             return new Vec2(Math.Round(x), Math.Round(y));
         }
-        public Vec2 Ceilinged() {
+        public Vec2 Ceilinged()
+        {
             return new Vec2(Math.Ceiling(x), Math.Ceiling(y));
         }
-        public override string ToString() {
+        public override string ToString()
+        {
             return string.Format("[{0}, {1}]", x, y);
         }
     }

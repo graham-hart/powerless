@@ -16,7 +16,7 @@ namespace CSLib
             this.pos = pos;
             this.type = type;
             this.layer = layer;
-            this.size = Vec2.Zero;
+            this.size = new Vec2(1,1);
         }
     }
 }
