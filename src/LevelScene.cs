@@ -18,7 +18,7 @@ namespace Powerless
         {
             tileAtlas = TextureAtlas.FromFile("assets/images/tiles/atlas/atlas.txt", "tile");
             spriteAtlas = TextureAtlas.FromFile("./assets/images/sprites/atlas/atlas.txt", "sprite");
-            tilemap = TileMap.FromFile("assets/tilemaps/test.ptm");
+            tilemap = TileMap.FromFile("assets/tilemaps/level01.ptm");
             Utils.SortTMLayers(tilemap);
             cam = new Camera(game.winSize, 3, 16);
             player = new Player(new Vec2(0, -1));

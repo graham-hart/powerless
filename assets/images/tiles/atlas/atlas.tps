@@ -136,7 +136,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename></filename>
+                <filename>atlas.txt</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -185,8 +185,16 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../imgs/platform.png</key>
-            <key type="filename">../imgs/platform2.png</key>
+            <key type="filename">../imgs/10.png</key>
+            <key type="filename">../imgs/11.png</key>
+            <key type="filename">../imgs/12.png</key>
+            <key type="filename">../imgs/13.png</key>
+            <key type="filename">../imgs/14.png</key>
+            <key type="filename">../imgs/15.png</key>
+            <key type="filename">../imgs/16.png</key>
+            <key type="filename">../imgs/6.png</key>
+            <key type="filename">../imgs/8.png</key>
+            <key type="filename">../imgs/9.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
