@@ -60,14 +60,14 @@ namespace CSLib
         {
             get
             {
-                return new Vec2(0, 1);
+                return new Vec2(0, -1);
             }
         }
         public static Vec2 Down
         {
             get
             {
-                return new Vec2(0, -1);
+                return new Vec2(0, 1);
             }
         }
         public static Vec2 operator +(Vec2 a, Vec2 b)

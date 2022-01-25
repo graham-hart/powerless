@@ -1,9 +1,7 @@
 using Raylib_cs;
 using static Raylib_cs.Raylib;
-using System;
 using System.Collections.Generic;
 using CSLib;
-using System.Linq;
 using static Powerless.Config;
 
 namespace Powerless
