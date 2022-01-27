@@ -2,6 +2,7 @@ using Raylib_cs;
 using static Raylib_cs.Raylib;
 using System.Collections.Generic;
 using CSLib;
+using System;
 using static Powerless.Config;
 
 namespace Powerless
@@ -22,13 +23,16 @@ namespace Powerless
             Utils.SortTMLayers(tilemap);
             cam = new Camera(game.winSize, 3, 16);
             player = new Player(new Vec2(0, -1));
-        }
-
-        public override void Update(float dt)
-        {
+            Console.WriteLine(player.transform.pos.ToString());
             visibleTiles = tilemap.GetVisible(cam);
-            player.Update(dt, visibleTiles);
-            cam.SetPos(player.transform.pos); 
+
+        }
+        public override void Update()
+        {
+            player.Update(visibleTiles);
+            cam.SetPos(player.transform.pos);
+            visibleTiles = tilemap.GetVisible(cam);
+
         }
         public override void Render()
         {

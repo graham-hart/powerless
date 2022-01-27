@@ -9,7 +9,7 @@ namespace CSLib
         {
             this.game = game;
         }
-        public abstract void Update(float dt);
+        public abstract void Update();
         public abstract void Render();
         public abstract void Quit();
     }

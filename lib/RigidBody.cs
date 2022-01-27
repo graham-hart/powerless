@@ -1,13 +1,18 @@
 using System.Collections.Generic;
-namespace CSLib {
-    class RigidBody {
+using static Powerless.Config;
+using System;
+namespace CSLib
+{
+    class RigidBody
+    {
         public Vec2 velocity;
         public Vec2 acceleration;
         public Transform transform;
         public Entity entity;
         public Vec2 change;
-        bool gravity = true;
-        public RigidBody(Entity entity) {
+        public bool gravity = true;
+        public RigidBody(Entity entity)
+        {
             this.entity = entity;
             transform = entity.transform;
             velocity = Vec2.Zero;
@@ -28,7 +33,7 @@ namespace CSLib {
             {
                 if (amount.x > 0) // Going right
                 {
-                    transform.pos.x = t.Left-tmp.Width;
+                    transform.pos.x = t.Left - tmp.Width;
                     hitDirs["right"] = true;
                     break;
                 }
@@ -52,7 +57,7 @@ namespace CSLib {
                 }
                 else if (amount.y > 0) // Going down
                 {
-                    transform.pos.y = t.Top-tmp.Height;
+                    transform.pos.y = t.Top - tmp.Height;
                     hitDirs["bottom"] = true;
                     break;
                 }
@@ -73,18 +78,25 @@ namespace CSLib {
             }
             return hits.ToArray();
         }
-        public void ChangePos(Vec2 amt) {
+        public void ChangePos(Vec2 amt)
+        {
             change += amt;
         }
-        public void Update(float dt, List<Tile> collideables) {
-            Move((velocity+change)*dt, collideables);
+        public void Update(List<Tile> collideables)
+        {
+            if (gravity)
+                AddVel(Vec2.Down * GRAVITY); 
+
+            Move((velocity + change), collideables);
             change = Vec2.Zero;
-            velocity += acceleration*dt;
+            velocity += acceleration;
         }
-        public void Accel(Vec2 amt) {
+        public void Accel(Vec2 amt)
+        {
             acceleration += amt;
         }
-        public void AddVel(Vec2 amt) {
+        public void AddVel(Vec2 amt)
+        {
             velocity += amt;
         }
     }

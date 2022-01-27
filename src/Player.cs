@@ -1,4 +1,5 @@
 using CSLib;
+using System;
 using Raylib_cs;
 using System.Collections.Generic;
 using static Powerless.Config;
@@ -7,6 +8,7 @@ namespace Powerless
     class Player : Entity
     {
         bool onGround = true;
+        const double MAX_VEL = .7;
         public Player(Vec2 pos) : base(pos, new Vec2(1, 1), new Sprite("testplayer"))
         {
 
@@ -16,11 +18,10 @@ namespace Powerless
             sprite.Render(transform.pos, cam);
         }
 
-        public override void Update(float dt, Dictionary<int, List<Tile>> surroundings)
+        public override void Update(Dictionary<int, List<Tile>> surroundings)
         {
-            float speed = 15f;
+            float speed = .5f;
             Vec2 move = Vec2.Zero;
-            move.y += 3;
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
                 move.x -= speed;
@@ -34,6 +35,8 @@ namespace Powerless
                 rb.velocity.y = 0;
                 rb.AddVel(Vec2.Up * JUMP_FORCE);
             }
+            rb.AddVel(move);
+            onGround = false;
             List<Tile> collide = new List<Tile>();
             foreach (int layer in COLLIDE_LAYERS)
             {
@@ -42,10 +45,8 @@ namespace Powerless
                     collide.AddRange(surroundings[layer]);
                 }
             }
-            rb.AddVel(Vec2.Down * GRAVITY);
-            rb.ChangePos(move);
-            onGround = false;
-            rb.Update(dt, collide);
+            rb.velocity.x = Math.Clamp(rb.velocity.x, -MAX_VEL, MAX_VEL);
+            rb.Update(collide);
         }
         public override void OnCollision(Dictionary<string, bool> dirs)
         {
@@ -53,7 +54,13 @@ namespace Powerless
             {
                 onGround = true;
                 rb.velocity.y = 0;
+                rb.velocity.x *= GROUND_FRICTION;
             }
+            else if (dirs["top"])
+            {
+                rb.velocity.y = 0;
+            }
+            rb.velocity.x *= AIR_RESISTANCE;
         }
     }
 }

@@ -6,7 +6,9 @@ namespace Powerless
         public const int MIDGROUND = 1; // Platforms
         public const int FOREGROUND = 2; // Obstacles (saws, lasers)
         public static readonly int[] COLLIDE_LAYERS = new int[] { MIDGROUND, FOREGROUND };
-        public const double GRAVITY = 1;
-        public const double JUMP_FORCE = 35;
+        public const double GRAVITY = 0.1;
+        public const double JUMP_FORCE = 1;
+        public const double GROUND_FRICTION = .75;
+        public const double AIR_RESISTANCE = 0.81;
     }
 }

@@ -20,10 +20,10 @@ namespace CSLib
         public virtual void OnCollision(Dictionary<string,bool> dirs) {
 
         }
-        public virtual void Update(float dt) {
+        public virtual void Update() {
 
         }
-        public virtual void Update(float dt, Dictionary<int, List<Tile>> surroundings) {
+        public virtual void Update(Dictionary<int, List<Tile>> surroundings) {
 
         }
     }
