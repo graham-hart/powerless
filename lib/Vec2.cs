@@ -243,5 +243,14 @@ namespace CSLib
         {
             return string.Format("[{0}, {1}]", x, y);
         }
+        public static Vec2 Lerp(Vec2 start, Vec2 end, double amount)
+        {
+            return new Vec2(start.x + ((end.x - start.x) * amount), start.y + ((end.y - start.y) * amount));
+        }
+        public void LimitLength(double len) {
+            if(Length() > len) {
+                SetLength(len);
+            }
+        }
     }
 }

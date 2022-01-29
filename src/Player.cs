@@ -2,13 +2,13 @@ using CSLib;
 using System;
 using Raylib_cs;
 using System.Collections.Generic;
-using static Powerless.Config;
+using static CSLib.Config;
 namespace Powerless
 {
     class Player : Entity
     {
         bool onGround = true;
-        const double MAX_VEL = .7;
+        const double MAX_VEL = .5;
         public Player(Vec2 pos) : base(pos, new Vec2(1, 1), new Sprite("testplayer"))
         {
 
@@ -20,15 +20,15 @@ namespace Powerless
 
         public override void Update(Dictionary<int, List<Tile>> surroundings)
         {
-            float speed = .5f;
+            float speed = .2f;
             Vec2 move = Vec2.Zero;
             if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
             {
-                move.x -= speed;
+                move.x -= speed * (onGround ? 1 : 0.7);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
             {
-                move.x += speed;
+                move.x += speed * (onGround ? 1 : 0.7);
             }
             if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && onGround)
             {
@@ -53,14 +53,7 @@ namespace Powerless
             if (dirs["bottom"])
             {
                 onGround = true;
-                rb.velocity.y = 0;
-                rb.velocity.x *= GROUND_FRICTION;
             }
-            else if (dirs["top"])
-            {
-                rb.velocity.y = 0;
-            }
-            rb.velocity.x *= AIR_RESISTANCE;
         }
     }
 }

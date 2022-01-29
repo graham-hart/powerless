@@ -88,10 +88,6 @@ namespace CSLib
             Vec2 bottomRight = cam.BottomRight;
             Vec2 topLeft = cam.TopLeft;
             Dictionary<int, List<Tile>> vis = new Dictionary<int, List<Tile>>();
-            int minX = (int)Math.Floor(topLeft.x);
-            int minY = (int)Math.Floor(topLeft.y);
-            int maxX = (int)Math.Floor(bottomRight.x);
-            int maxY = (int)Math.Floor(bottomRight.y);
             for (int x = (int)Math.Floor(topLeft.x); x < (int)Math.Ceiling(bottomRight.x); x++)
             {
                 for (int y = (int)Math.Floor(topLeft.y); y < (int)Math.Ceiling(bottomRight.y); y++)

@@ -16,29 +16,9 @@ namespace CSLib
             this.title = title;
             Raylib.InitWindow((int)winSize.x, (int)winSize.y, title);
         }
-        // public void Run()
-        // {
-        //     while (!Raylib.WindowShouldClose() && !quitFlag)
-        //     {
-        //         float dt = Raylib.GetFrameTime();
-        //         if (currentScene != null)
-        //         {
-        //             currentScene.Update(dt);
-        //             currentScene.Render();
-        //         }
-        //         else
-        //         {
-        //             Raylib.ClearBackground(Color.BLACK);
-        //             Raylib.BeginDrawing();
-        //             Raylib.DrawText("No Scene Selected", 50, 50, 10, Color.WHITE);
-        //             Raylib.EndDrawing();
-        //         }
-        //     }
-        //     Raylib.CloseWindow();
-        // }
         public void Run() {
             const int ups = 30;
-            const double dt = (double)ups/1000;
+            const double dt = (double)1/ups;
             double currentTime = Raylib.GetTime();
             double accumulator = 0;
             while(!Raylib.WindowShouldClose() && !quitFlag) {

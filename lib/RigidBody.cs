@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using static Powerless.Config;
 using System;
+using static CSLib.Config;
 namespace CSLib
 {
     class RigidBody
@@ -62,6 +62,7 @@ namespace CSLib
                     break;
                 }
             }
+            OnCollision(hitDirs);
             entity.OnCollision(hitDirs);
             return hitDirs;
         }
@@ -85,7 +86,7 @@ namespace CSLib
         public void Update(List<Tile> collideables)
         {
             if (gravity)
-                AddVel(Vec2.Down * GRAVITY); 
+                AddVel(Vec2.Down * GRAVITY);
 
             Move((velocity + change), collideables);
             change = Vec2.Zero;
@@ -98,6 +99,26 @@ namespace CSLib
         public void AddVel(Vec2 amt)
         {
             velocity += amt;
+        }
+        public void OnCollision(Dictionary<string, bool> dirs)
+        {
+            if (dirs["bottom"])
+            {
+                velocity.y = 0;
+                velocity.x *= GROUND_FRICTION;
+            }
+            else if (dirs["top"])
+            {
+                velocity.y = 0;
+            }
+            if (dirs["left"])
+            {
+                velocity.x = 0;
+            }
+            else if (dirs["right"])
+            {
+                velocity.x = 0;
+            }
         }
     }
 }
