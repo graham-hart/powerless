@@ -1,0 +1,8 @@
+atlas.png
+size: 32, 16
+testplayer2
+  xy: 0, 0
+  size: 16, 16
+testplayer
+  xy: 16, 0
+  size: 16, 16

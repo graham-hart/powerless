@@ -9,8 +9,6 @@ namespace Powerless
         {
             Game game = new Game(new Vec2(1600, 900), "Powerless");
             game.Run();
-            // Camera cam = new Camera(new Vec2(500, 500), 8);
-            // Console.WriteLine(cam.ProjectX(1));
         }
     }
 }

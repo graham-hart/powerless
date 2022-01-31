@@ -28,12 +28,9 @@ namespace CSLib
             string[] lines = File.ReadLines(fn).ToArray();
             string imagefn = lines[0];
             string size = lines[1].Replace("size: ", "");
-            string format = lines[2].Replace("format: ", "");
-            string filter = lines[3].Replace("filter: ", "");
-            string repeat = lines[4].Replace("repeat: ", "");
             string currName = null;
             Rectangle currRect = new Rectangle();
-            for(int i = 5; i < lines.Length; i++) 
+            for(int i = 2; i < lines.Length; i++) 
             {
                 string line = lines[i];
                 if(!line.StartsWith("  ")) {
@@ -59,7 +56,6 @@ namespace CSLib
         public void DrawTexture(string id, Vec2 pos)
         {
             DrawTextureRec(text, images[id], new System.Numerics.Vector2((float)pos.x, (float)pos.y), Color.WHITE);
-            // Raylib.DrawRectangle((int)pos.x,(int)pos.y, (int)images[id].width, (int)images[id].height, Color.WHITE);
         }
         public static TextureAtlas GetAtlas(string name) {
             return atlases[name];

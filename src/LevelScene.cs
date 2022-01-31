@@ -19,9 +19,9 @@ namespace Powerless
         Dictionary<int, List<Tile>> visibleTiles;
         public LevelScene(MainGame game) : base(game)
         {
-            tileAtlas = TextureAtlas.FromFile("assets/images/tiles/atlas/atlas.txt", "tile");
-            spriteAtlas = TextureAtlas.FromFile("./assets/images/sprites/atlas/atlas.txt", "sprite");
-            uiAtlas = TextureAtlas.FromFile("./assets/images/ui/atlas/atlas.txt", "ui");
+            tileAtlas = TextureAtlas.FromFile("assets/images/tiles/atlas/atlas.atlas", "tile");
+            spriteAtlas = TextureAtlas.FromFile("./assets/images/sprites/atlas/atlas.atlas", "sprite");
+            uiAtlas = TextureAtlas.FromFile("./assets/images/ui/atlas/atlas.atlas", "ui");
             tilemap = TileMap.FromFile("assets/tilemaps/level01.ptm");
             Utils.SortTMLayers(tilemap);
             cam = new Camera(game.winSize, 3, 16);

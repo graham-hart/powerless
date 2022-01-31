@@ -1,0 +1,5 @@
+atlas.png
+size: 320, 180
+hud
+  xy: 0, 0
+  size: 320, 180
