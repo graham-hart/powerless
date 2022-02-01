@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System;
-using static CSLib.Config;
 namespace CSLib
 {
     class RigidBody
@@ -10,7 +9,10 @@ namespace CSLib
         public Transform transform;
         public Entity entity;
         public Vec2 change;
-        public bool gravity = true;
+        public bool hasGravity = true;
+        public static double GRAVITY = 0.1;
+        public static double GROUND_FRICTION = 1;
+        public static double AIR_RESISTANCE = 1;
         public RigidBody(Entity entity)
         {
             this.entity = entity;
@@ -85,7 +87,7 @@ namespace CSLib
         }
         public void Update(List<Tile> collideables)
         {
-            if (gravity)
+            if (hasGravity)
                 AddVel(Vec2.Down * GRAVITY);
 
             Move((velocity + change), collideables);
