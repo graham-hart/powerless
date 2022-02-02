@@ -9,6 +9,6 @@ namespace CSLib
         public static double GRAVITY = 0.1;
         public static double JUMP_FORCE = 1;
         public static double GROUND_FRICTION = .4;
-        public static double AIR_RESISTANCE = 0.1;
+        public static double AIR_RESISTANCE = 0.4;
     }
 }

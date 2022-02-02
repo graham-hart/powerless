@@ -9,6 +9,7 @@ namespace Powerless
     {
         bool onGround = true;
         const double MAX_VEL = .5;
+        public double energy = 8;
         public Player(Vec2 pos) : base(pos, new Vec2(1, 1), new Sprite("testplayer"))
         {
 
@@ -20,22 +21,32 @@ namespace Powerless
 
         public override void Update(Dictionary<int, List<Tile>> surroundings)
         {
-            float speed = .2f;
-            Vec2 move = Vec2.Zero;
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_A))
-            {
-                move.x -= speed * (onGround ? 1 : 0.7);
+            if (energy > 0) {
+                float speed = .2f;
+                Vec2 move = Vec2.Zero;
+                if (Input.IsKeyDown(KeyboardKey.KEY_A))
+                {
+                    move.x -= speed * (onGround ? 1 : 0.7);
+                }
+                if (Input.IsKeyDown(KeyboardKey.KEY_D))
+                {
+                    move.x += speed * (onGround ? 1 : 0.7);
+                }
+                if(move != Vec2.Zero) {
+                    energy -= 0.005;
+                }
+                if (Input.IsKeyDown(KeyboardKey.KEY_SPACE) && onGround)
+                {
+                    energy -= 0.01;
+                    rb.velocity.y = 0;
+                    rb.AddVel(Vec2.Up * JUMP_FORCE);
+                }
+                rb.AddVel(move);
             }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_D))
+            if (Input.IsKeyPressed(KeyboardKey.KEY_E))
             {
-                move.x += speed * (onGround ? 1 : 0.7);
+                energy += 1;
             }
-            if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && onGround)
-            {
-                rb.velocity.y = 0;
-                rb.AddVel(Vec2.Up * JUMP_FORCE);
-            }
-            rb.AddVel(move);
             onGround = false;
             List<Tile> collide = new List<Tile>();
             foreach (int layer in COLLIDE_LAYERS)

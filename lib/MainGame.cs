@@ -27,7 +27,10 @@ namespace CSLib
                 while(accumulator >=dt) {
                     currentScene.Update();
                     accumulator -= dt;
+                    Input.FlushKeys();
+                    Input.FlushMouse();
                 }
+                Input.LogInput();
                 currentScene.Render();
             }
             Raylib.CloseWindow();

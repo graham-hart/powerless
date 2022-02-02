@@ -33,7 +33,7 @@ namespace Powerless
         public override void Update()
         {
             player.Update(visibleTiles);
-            Utils.CameraLerp(cam, player.transform.pos, .7, 3);
+            Utils.CameraLerp(cam, player.transform.pos, .4, 4);
             visibleTiles = tilemap.GetVisible(cam);
         }
         public override void Render()
@@ -56,6 +56,7 @@ namespace Powerless
             EndMode2D();
             BeginMode2D(uiCam.camera);
             uiAtlas.DrawTexture("hud", new Vec2(0, 0));
+            uiAtlas.DrawTexture("energybar_" + Math.Round(Math.Clamp(player.energy, 0, 8)), new Vec2(2, 2));
             EndMode2D();
             EndDrawing();
         }

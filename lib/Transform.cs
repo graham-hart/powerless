@@ -18,6 +18,9 @@ namespace CSLib
             this.pos = pos;
             this.size = size;
         }
+        public void SetPos(Vec2 pos) {
+            this.pos.Set(pos);
+        }
         public void Move(Vec2 change)
         {
             pos.Add(change);
