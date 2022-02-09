@@ -21,62 +21,72 @@ namespace CSLib
             acceleration = Vec2.Zero;
             change = Vec2.Zero;
         }
-        public Dictionary<string, bool> Move(Vec2 amount, List<Tile> nearbyTiles)
+        public Dictionary<string, List<Tile>> Move(Vec2 amount, List<Tile> nearbyTiles)
         {
-            Dictionary<string, bool> hitDirs = new Dictionary<string, bool>();
-            foreach (string dir in new string[] { "left", "right", "top", "bottom" })
-            {
-                hitDirs.Add(dir, false);
-            }
+            Dictionary<string, List<Tile>> hitDirs = new Dictionary<string, List<Tile>>();
             transform.Move(amount.x, 0);
-            Rect[] collisionList = CollisionList(nearbyTiles);
+            Tile[] collisionList = CollisionList(nearbyTiles);
             Rect tmp = transform.Rect;
-            foreach (Rect t in collisionList)
+            foreach (Tile t in collisionList)
             {
+                Rect r = t.Rect;
                 if (amount.x > 0) // Going right
                 {
-                    transform.pos.x = t.Left - tmp.Width;
-                    hitDirs["right"] = true;
-                    break;
+                    transform.pos.x = r.Left - tmp.Width;
+                    if(!hitDirs.ContainsKey("right")) {
+                        hitDirs.Add("right", new List<Tile>());
+                    }
+                    hitDirs["right"].Add(t);
                 }
                 else if (amount.x < 0) // Going left
                 {
-                    transform.pos.x = t.Right;
-                    hitDirs["left"] = true;
-                    break;
+                    transform.pos.x = r.Right;
+                    if (!hitDirs.ContainsKey("left"))
+                    {
+                        hitDirs.Add("left", new List<Tile>());
+                    }
+                    hitDirs["left"].Add(t);
                 }
             }
             transform.Move(0, amount.y);
             collisionList = CollisionList(nearbyTiles);
             tmp = transform.Rect;
-            foreach (Rect t in collisionList)
+            foreach (Tile t in collisionList)
             {
+                Rect r = t.Rect;
+
                 if (amount.y < 0) // Going up
                 {
-                    transform.pos.y = t.Bottom;
-                    hitDirs["top"] = true;
+                    transform.pos.y = r.Bottom;
+                    if (!hitDirs.ContainsKey("top"))
+                    {
+                        hitDirs.Add("top", new List<Tile>());
+                    }
+                    hitDirs["top"].Add(t);
                     break;
                 }
                 else if (amount.y > 0) // Going down
                 {
-                    transform.pos.y = t.Top - tmp.Height;
-                    hitDirs["bottom"] = true;
-                    break;
+                    transform.pos.y = r.Top - tmp.Height;
+                    if (!hitDirs.ContainsKey("bottom"))
+                    {
+                        hitDirs.Add("bottom", new List<Tile>());
+                    }
+                    hitDirs["bottom"].Add(t);
                 }
             }
             OnCollision(hitDirs);
             entity.OnCollision(hitDirs);
             return hitDirs;
         }
-        public Rect[] CollisionList(List<Tile> collideables)
+        public Tile[] CollisionList(List<Tile> collideables)
         {
-            List<Rect> hits = new List<Rect>();
+            List<Tile> hits = new List<Tile>();
             foreach (Tile t in collideables)
             {
-                Rect r = t.Rect;
-                if (transform.Rect.CollideRect(r))
+                if (transform.Rect.CollideRect(t.Rect))
                 {
-                    hits.Add(r);
+                    hits.Add(t);
                 }
             }
             return hits.ToArray();
@@ -102,22 +112,22 @@ namespace CSLib
         {
             velocity += amt;
         }
-        public void OnCollision(Dictionary<string, bool> dirs)
+        public void OnCollision(Dictionary<string, List<Tile>> dirs)
         {
-            if (dirs["bottom"])
+            if (dirs.ContainsKey("bottom"))
             {
                 velocity.y = 0;
                 velocity.x *= GROUND_FRICTION;
             }
-            else if (dirs["top"])
+            else if (dirs.ContainsKey("top"))
             {
                 velocity.y = 0;
             }
-            if (dirs["left"])
+            if (dirs.ContainsKey("right"))
             {
                 velocity.x = 0;
             }
-            else if (dirs["right"])
+            else if (dirs.ContainsKey("left"))
             {
                 velocity.x = 0;
             }

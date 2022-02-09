@@ -55,8 +55,7 @@ namespace Powerless
             player.Render(cam);
             EndMode2D();
             BeginMode2D(uiCam.camera);
-            uiAtlas.DrawTexture("hud", new Vec2(0, 0));
-            uiAtlas.DrawTexture("energybar_" + Math.Round(Math.Clamp(player.energy, 0, 8)), new Vec2(2, 2));
+            uiAtlas.DrawTexture("healthbar_" + Math.Round(Math.Clamp(8-Utils.Map(player.energy, 0, MAX_ENERGY, 0, 8), 0, 8)), new Vec2(0,0));
             EndMode2D();
             EndDrawing();
         }

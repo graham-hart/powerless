@@ -1,32 +1,29 @@
 atlas.png
-size: 320, 192
-energybar_6
-  xy: 0, 180
-  size: 46, 6
-energybar_2
-  xy: 0, 186
-  size: 46, 6
-energybar_3
-  xy: 46, 180
-  size: 46, 6
-energybar_1
-  xy: 46, 186
-  size: 46, 6
-energybar_0
-  xy: 92, 180
-  size: 46, 6
-energybar_7
-  xy: 92, 186
-  size: 46, 6
-energybar_5
-  xy: 138, 180
-  size: 46, 6
-hud
+size: 495, 16
+healthbar_3
   xy: 0, 0
-  size: 320, 180
-energybar_4
-  xy: 138, 186
-  size: 46, 6
-energybar_8
-  xy: 184, 180
-  size: 46, 6
+  size: 55, 16
+healthbar_0
+  xy: 55, 0
+  size: 55, 16
+healthbar_6
+  xy: 110, 0
+  size: 55, 16
+healthbar_7
+  xy: 165, 0
+  size: 55, 16
+healthbar_8
+  xy: 220, 0
+  size: 55, 16
+healthbar_5
+  xy: 275, 0
+  size: 55, 16
+healthbar_1
+  xy: 330, 0
+  size: 55, 16
+healthbar_2
+  xy: 385, 0
+  size: 55, 16
+healthbar_4
+  xy: 440, 0
+  size: 55, 16

@@ -59,5 +59,16 @@ namespace CSLib
                 cam.LimitDist(pos, maxDist);
             }
         }
-    }
+        public static double Map(double val, double start, double end, double newStart, double newEnd) {
+            return newStart + ((newEnd - newStart) / (end-start)) * (val - start);
+        }
+        public static bool Any<T>(List<T> lst, Func<T, bool> fn) {
+            foreach(T i in lst) {
+                if(fn(i)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }   
 }

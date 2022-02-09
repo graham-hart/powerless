@@ -14,10 +14,10 @@ namespace CSLib
             rb = new RigidBody(this);
             this.sprite = sprite;
         }
-        public Dictionary<string, bool> Move(Vec2 amount, List<Tile> nearbyTiles) {
+        public Dictionary<string, List<Tile>> Move(Vec2 amount, List<Tile> nearbyTiles) {
             return rb.Move(amount, nearbyTiles);
         }
-        public virtual void OnCollision(Dictionary<string,bool> dirs) {
+        public virtual void OnCollision(Dictionary<string, List<Tile>> dirs) {
 
         }
         public virtual void Update() {
