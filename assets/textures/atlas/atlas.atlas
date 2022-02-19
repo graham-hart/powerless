@@ -1,0 +1,65 @@
+atlas.png
+size: 687, 16
+tile_battery
+  xy: 495, 0
+  size: 16, 16
+tile_3
+  xy: 511, 0
+  size: 16, 16
+testplayer2
+  xy: 527, 0
+  size: 16, 16
+tile_2
+  xy: 543, 0
+  size: 16, 16
+tile_charge
+  xy: 559, 0
+  size: 16, 16
+healthbar_3
+  xy: 0, 0
+  size: 55, 16
+healthbar_0
+  xy: 55, 0
+  size: 55, 16
+healthbar_6
+  xy: 110, 0
+  size: 55, 16
+tile_0
+  xy: 575, 0
+  size: 16, 16
+healthbar_7
+  xy: 165, 0
+  size: 55, 16
+tile_1
+  xy: 591, 0
+  size: 16, 16
+healthbar_8
+  xy: 220, 0
+  size: 55, 16
+tile_7
+  xy: 607, 0
+  size: 16, 16
+healthbar_5
+  xy: 275, 0
+  size: 55, 16
+tile_6
+  xy: 623, 0
+  size: 16, 16
+testplayer
+  xy: 639, 0
+  size: 16, 16
+tile_4
+  xy: 655, 0
+  size: 16, 16
+healthbar_1
+  xy: 330, 0
+  size: 55, 16
+healthbar_2
+  xy: 385, 0
+  size: 55, 16
+healthbar_4
+  xy: 440, 0
+  size: 55, 16
+tile_5
+  xy: 671, 0
+  size: 16, 16

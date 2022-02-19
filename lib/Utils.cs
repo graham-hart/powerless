@@ -15,10 +15,11 @@ namespace CSLib
         public static bool SendInput(TextInput input)
         {
             bool beenPressed = false;
-            int key = GetKeyPressed();
-            while (key != 0)
+            int key = (int)Input.GetKeyPressed();
+            while (key != -1)
             {
-                if (IsLetter((char)key) && !IsKeyDown(KEY_LEFT_SHIFT) && !IsKeyDown(KEY_RIGHT_SHIFT))
+                Console.WriteLine(key);
+                if (IsLetter((char)key) && !Input.IsKeyDown(KEY_LEFT_SHIFT) && !Input.IsKeyDown(KEY_RIGHT_SHIFT))
                 {
                     input.SendInput(key + 32);
                 }
@@ -26,7 +27,7 @@ namespace CSLib
                 {
                     input.SendInput(key);
                 }
-                key = GetCharPressed();
+                key = (int)Input.GetKeyPressed();
                 beenPressed = true;
             }
             return beenPressed;

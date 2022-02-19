@@ -8,7 +8,7 @@ namespace Powerless
     class Player : Entity
     {
         bool onGround = true;
-        const double MAX_VEL = .5;
+        const double MAX_VEL = .6;
         public double energy = 2;
         public Player(Vec2 pos) : base(pos, new Vec2(1, 1), new Sprite("testplayer"))
         {
@@ -22,7 +22,7 @@ namespace Powerless
 
         public override void Update(Dictionary<int, List<Tile>> surroundings)
         {
-            float speed = .17f;
+            float speed = .20f;
             Vec2 move = Vec2.Zero;
             if (Input.IsKeyDown(KeyboardKey.KEY_A))
             {

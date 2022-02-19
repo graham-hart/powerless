@@ -1,30 +1,22 @@
 using Raylib_cs;
 using static Raylib_cs.Raylib;
-using CSLib;
 using System.IO;
 using System.Collections.Generic;
-using System;
 using System.Linq;
 
 namespace CSLib
 {
     class TextureAtlas
     {
-        static Dictionary<string, TextureAtlas> atlases = new Dictionary<string, TextureAtlas>();
-        Texture2D text;
-        Dictionary<string, Rectangle> images = new Dictionary<string, Rectangle>();
-        private TextureAtlas(string name)
-        {
-            atlases.Add(name, this);
-        }
+        static Texture2D texture;
+        public static Dictionary<string, Rectangle> textures;
         public string[] AllTextureNames()
         {
-            return images.Keys.ToArray();
+            return textures.Keys.ToArray();
         }
-        public static TextureAtlas FromFile(string fn, string name)
+        public static void LoadFile(string fn)
         {
-            TextureAtlas tx = new TextureAtlas(name);
-            Dictionary<string, Rectangle> imgs = tx.images;
+            textures = new Dictionary<string, Rectangle>();
             string[] lines = File.ReadLines(fn).ToArray();
             string imagefn = lines[0];
             string size = lines[1].Replace("size: ", "");
@@ -35,7 +27,7 @@ namespace CSLib
                 string line = lines[i];
                 if(!line.StartsWith("  ")) {
                     if(currName != null) {
-                        imgs.Add(currName,currRect);
+                        textures.Add(currName,currRect);
                     }
                     currRect = new Rectangle();
                     currName = line.Replace("\n", "");
@@ -49,16 +41,12 @@ namespace CSLib
                     currRect.height = int.Parse(tmp[1]);
                 }
             }
-            imgs.Add(currName, currRect);
-            tx.text = LoadTexture(fn.Substring(0, fn.LastIndexOf("/")) + "/" + imagefn);
-            return tx;
+            textures.Add(currName, currRect);
+            texture = LoadTexture(fn.Substring(0, fn.LastIndexOf("/")) + "/" + imagefn);
         }
-        public void DrawTexture(string id, Vec2 pos)
+        public static void DrawTexture(string id, Vec2 pos)
         {
-            DrawTextureRec(text, images[id], new System.Numerics.Vector2((float)pos.x, (float)pos.y), Color.WHITE);
-        }
-        public static TextureAtlas GetAtlas(string name) {
-            return atlases[name];
+            DrawTextureRec(texture, textures[id], new System.Numerics.Vector2((float)pos.x, (float)pos.y), Color.WHITE);
         }
     }
 }

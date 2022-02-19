@@ -9,6 +9,7 @@ namespace CSLib
     class TileMap
     {
         Dictionary<int, Dictionary<Vec2, Tile>> tiles;
+        public Dictionary<int, List<Tile>> visibleTiles;
         public List<int> layers;
         public TileMap()
         {
@@ -83,7 +84,7 @@ namespace CSLib
                 layers.Remove(layer);
             }
         }
-        public Dictionary<int, List<Tile>> GetVisible(Camera cam)
+        public void UpdateVisibleTiles(Camera cam)
         {
             Vec2 bottomRight = cam.BottomRight;
             Vec2 topLeft = cam.TopLeft;
@@ -102,7 +103,7 @@ namespace CSLib
                     }
                 }
             }
-            return vis;
+            visibleTiles = vis;
         }
         public static TileMap RandomTM(int width, int height, string[] typeList)
         {
@@ -116,6 +117,20 @@ namespace CSLib
                 }
             }
             return tm;
+        }
+
+        public void Render(Camera cam) {
+            foreach (int z in layers)
+            {
+                if (visibleTiles.ContainsKey(z))
+                {
+                    List<Tile> layer = visibleTiles[z];
+                    foreach (Tile t in layer)
+                    {
+                        TextureAtlas.DrawTexture(t.type, t.pos * cam.pixelsPerUnit);
+                    }
+                }
+            }
         }
     }
 }

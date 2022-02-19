@@ -8,7 +8,7 @@ namespace CSLib
         }
         public void Render(Vec2 pos, Camera cam)
         {
-            TextureAtlas.GetAtlas("sprite").DrawTexture(texture, pos*cam.pixelsPerUnit);
+            TextureAtlas.DrawTexture(texture, pos*cam.pixelsPerUnit);
         }
     }
 }
