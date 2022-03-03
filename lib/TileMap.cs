@@ -23,6 +23,7 @@ namespace CSLib
         }
         public static TileMap FromFile(string fn)
         {
+            Console.WriteLine(fn);
             string[] allTiles = String.Concat(File.ReadAllText(fn).Where(c => !Char.IsWhiteSpace(c))).Split(';');
             Dictionary<int, Dictionary<Vec2, Tile>> tiles = new Dictionary<int, Dictionary<Vec2, Tile>>();
             List<int> layers = new List<int>();

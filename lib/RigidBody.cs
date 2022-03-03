@@ -131,6 +131,7 @@ namespace CSLib
             {
                 velocity.x = 0;
             }
+            velocity.x *= AIR_RESISTANCE;
         }
     }
 }

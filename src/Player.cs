@@ -10,6 +10,7 @@ namespace Powerless
         bool onGround = true;
         const double MAX_VEL = .6;
         public double energy = 2;
+        public bool alive = true;
         public Player(Vec2 pos) : base(pos, new Vec2(1, 1), new Sprite("testplayer"))
         {
 
@@ -22,20 +23,24 @@ namespace Powerless
 
         public override void Update(Dictionary<int, List<Tile>> surroundings)
         {
+            if(Input.IsKeyPressed(KeyboardKey.KEY_Q)) {
+                alive = false;
+                return;
+            }
             float speed = .20f;
             Vec2 move = Vec2.Zero;
             if (Input.IsKeyDown(KeyboardKey.KEY_A))
             {
-                move.x -= speed * (onGround ? 1 : 0.3);
+                move.x -= speed * (onGround ? 1 : 0.1);
             }
             if (Input.IsKeyDown(KeyboardKey.KEY_D))
             {
-                move.x += speed * (onGround ? 1 : 0.3);
+                move.x += speed * (onGround ? 1 : 0.1);
             }
             if(move != Vec2.Zero) {
                 energy -= 0.005;
             }
-            rb.AddVel(move * (energy <= 0 ? .5 : 1));
+            rb.AddVel(move * (energy <= 0 ? .5 : 1 ));
             if (Input.IsKeyDown(KeyboardKey.KEY_SPACE) && onGround)
             {
                 energy -= 0.01;
@@ -58,12 +63,15 @@ namespace Powerless
             }
             rb.velocity.x = Math.Clamp(rb.velocity.x, -MAX_VEL, MAX_VEL);
             rb.Update(collide);
+            if(transform.pos.y > 5) {
+                alive = false;
+            }
         }
         public override void OnCollision(Dictionary<string, List<Tile>> dirs)
         {
             if (dirs.ContainsKey("bottom"))
             {
-                if(Utils.Any(dirs["bottom"], (val) => {return val.type == "tileset_battery";})) {
+                if(Utils.Any(dirs["bottom"], (val) => {return val.type == "tile_battery";})) {
                     energy = MAX_ENERGY;
                 }
                 onGround = true;

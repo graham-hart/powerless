@@ -9,7 +9,7 @@ namespace Powerless
             RigidBody.GRAVITY = Config.GRAVITY;
             RigidBody.GROUND_FRICTION = Config.GROUND_FRICTION;
             RigidBody.AIR_RESISTANCE = Config.AIR_RESISTANCE;
-            SetScene(new LevelScene(this));
+            SetScene(new MainMenuScene(this));
         }
     }
 }
